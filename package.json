@@ -18,6 +18,7 @@
     "url": "https://github.com/slipuykamin/goit-js-hw-09/issues"
   },
   "dependencies": {
+    "flatpickr": "^4.6.13",
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
