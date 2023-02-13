@@ -1,5 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import Notiflix from 'notiflix';
+// one by one
 
 refs = {
   startBtn: document.querySelector('[data-start]'),
@@ -23,16 +25,20 @@ class Timer {
 
   start(selectedDate, currentDate) {
     this.isActive = true;
+    updateTimer(selectedDate - currentDate);
+    currentDate += 1000;
 
     this.intervalId = setInterval(() => {
       let remainder = selectedDate - currentDate;
       currentDate += 1000;
       if (remainder <= 0) {
+        refs.stopBtn.setAttribute('disabled', 'disabled');
         this.stop();
         return;
       }
       updateTimer(remainder);
     }, 1000);
+    Notiflix.Notify.success('Timer started');
   }
 
   stop() {
@@ -73,7 +79,8 @@ const options = {
     currentDate = new Date().getTime();
 
     if (selectedDate < currentDate) {
-      window.alert('Please choose a date in the future');
+      //   window.alert('Please choose a date in the future');
+      Notiflix.Notify.failure('Please choose a date in the future');
       return;
     }
 
@@ -90,6 +97,7 @@ const updateTimer = remainder => {
 };
 
 const onStartBtnClick = () => {
+  //   updateTimer(remainder);
   timer.start(selectedDate, currentDate);
   refs.stopBtn.textContent = 'Stop';
 
