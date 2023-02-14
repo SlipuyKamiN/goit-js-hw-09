@@ -9,6 +9,8 @@ const refs = {
 
 let position = 0;
 let delay = 0;
+let step = 0;
+let amount = 0;
 let intervalId = null;
 
 function createPromise(position, delay) {
